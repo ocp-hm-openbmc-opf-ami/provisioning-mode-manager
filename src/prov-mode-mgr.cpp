@@ -123,7 +123,6 @@ void ProvModeMgr::init()
                     provMode = mode;
                     logEvent(mode);
                     updateProvModeProperty(mode);
-                    return 1;
                 }
             }
             catch (const std::exception& e)
@@ -132,8 +131,9 @@ void ProvModeMgr::init()
                     "RestrictionMode set-property failed",
                     phosphor::logging::entry("Mode=%s", req.c_str()),
                     phosphor::logging::entry("EXCEPTION=%s", e.what()));
+                return false;
             }
-            return 0;
+            return true;
         },
         [this](const std::string& propertyValue) {
             return sdbusplus::xyz::openbmc_project::Control::Security::server::
