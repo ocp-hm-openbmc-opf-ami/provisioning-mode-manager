@@ -45,6 +45,8 @@ target_link_libraries(${PROJECT_NAME} phosphor_logging)
 set(SERVICE_FILES
     ${PROJECT_SOURCE_DIR}/xyz.openbmc_project.RestrictionMode.Manager.service)
 
+pkg_get_variable(SYSTEMD_SYSTEM_UNIT_DIR systemd systemdsystemunitdir)
+
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-install(FILES ${SERVICE_FILES} DESTINATION /lib/systemd/system/)
+install(FILES ${SERVICE_FILES} DESTINATION "${SYSTEMD_SYSTEM_UNIT_DIR}")
 
