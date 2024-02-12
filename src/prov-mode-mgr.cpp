@@ -86,11 +86,11 @@ void ProvModeMgr::logEvent(sdbusplus::xyz::openbmc_project::Control::Security::
                         "PRIORITY=%i", LOG_INFO, "REDFISH_MESSAGE_ID=%s",
                         "OpenBMC.0.1.SystemInterfaceUnprovisioned", NULL);
     }
-    else if (mode == secCtrl::RestrictionMode::Modes::ProvisionedHostWhitelist)
+    else if (mode == secCtrl::RestrictionMode::Modes::ProvisionedHostAllowlist)
     {
-        sd_journal_send("MESSAGE=%s", "RestrictionMode - Whitelist state",
+        sd_journal_send("MESSAGE=%s", "RestrictionMode - Allowlist state",
                         "PRIORITY=%i", LOG_INFO, "REDFISH_MESSAGE_ID=%s",
-                        "OpenBMC.0.1.SystemInterfaceWhitelistProvisioned",
+                        "OpenBMC.0.1.SystemInterfaceAllowlistProvisioned",
                         NULL);
     }
     else if (mode == secCtrl::RestrictionMode::Modes::ProvisionedHostDisabled)
