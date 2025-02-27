@@ -20,7 +20,7 @@
 #include <xyz/openbmc_project/Common/error.hpp>
 
 ProvModeMgr::ProvModeMgr(
-    boost::asio::io_service& ioService, sdbusplus::asio::object_server& srv,
+    boost::asio::io_context& ioService, sdbusplus::asio::object_server& srv,
     std::shared_ptr<sdbusplus::asio::connection>& connection) :
     io(ioService),
     server(srv), conn(connection),

@@ -15,7 +15,7 @@
 */
 
 #pragma once
-#include <boost/asio/io_service.hpp>
+#include <boost/asio/io_context.hpp>
 #include <sdbusplus/asio/object_server.hpp>
 #include <xyz/openbmc_project/Control/Security/RestrictionMode/server.hpp>
 
@@ -38,7 +38,7 @@ static constexpr const char* uBootEnvProvision = "provision";
 
 class ProvModeMgr
 {
-    boost::asio::io_service& io;
+    boost::asio::io_context& io;
     sdbusplus::asio::object_server& server;
     std::shared_ptr<sdbusplus::asio::connection> conn;
     std::shared_ptr<sdbusplus::asio::dbus_interface> iface;
@@ -59,7 +59,7 @@ class ProvModeMgr
                       RestrictionMode::Modes mode);
 
   public:
-    ProvModeMgr(boost::asio::io_service& io,
+    ProvModeMgr(boost::asio::io_context& io,
                 sdbusplus::asio::object_server& srv,
                 std::shared_ptr<sdbusplus::asio::connection>& conn);
 };
