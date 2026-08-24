@@ -1,0 +1,268 @@
+commit a2481863eab0adde873c564786c296d8b0ad1514
+Author: Sneha Deb <sneha.deb@intel.com>
+Date:   Thu May 22 10:59:22 2025 +0530
+
+    Modify README.md for integration document (#9)
+    
+    * Modify README.md for integration document
+    
+    Signed-off-by: Sneha Deb <sneha.deb@intel.com>
+    
+    * Dummy commit
+    
+    ---------
+    
+    Signed-off-by: Sneha Deb <sneha.deb@intel.com>
+
+commit ec0288a7e3e2b1bcd2e41eab107b2dd0d5c2d2cf
+Author: Terry Duncan <terry.s.duncan@intel.com>
+Date:   Thu May 1 08:43:46 2025 -0700
+
+    Revert license collab (#10)
+    
+    * Revert "According LICENSE-collab.md to intel-collab policy"
+    
+    This reverts commit 9b70197fb51e4411447e52b7f82096396bd36b4b.
+    
+    * Revert "According README-collab.md to intel-collab policy"
+    
+    This reverts commit c3b3203986bad2c9725645660f957e101f3f86ab.
+
+commit 9b70197fb51e4411447e52b7f82096396bd36b4b
+Author: sys-1sgithubsupport <sys_1sgithubsupport@intel.com>
+Date:   Fri Apr 25 04:56:37 2025 +0530
+
+    According LICENSE-collab.md to intel-collab policy
+
+commit c3b3203986bad2c9725645660f957e101f3f86ab
+Author: sys-1sgithubsupport <sys_1sgithubsupport@intel.com>
+Date:   Fri Apr 25 04:56:36 2025 +0530
+
+    According README-collab.md to intel-collab policy
+
+commit 9aa676d3710a04d4d8409de86fc792bbc4cc1b81
+Author: Jason M. Bills <jason.m.bills@intel.com>
+Date:   Wed Apr 23 07:54:27 2025 -0600
+
+    Update to C++23 (#8)
+    
+    Update to C++23 which is required for sdbusplus
+    
+    Signed-off-by: Jason M. Bills <jason.m.bills@intel.com>
+
+commit 128c7596bb40403d5376006a5765c5d3533177d9
+Author: Jason M. Bills <jasonm.bills@yahoo.com>
+Date:   Thu Feb 27 08:57:33 2025 -0700
+
+    Fix build issues with boost 1.87 (#7)
+    
+    Update deprecated terminology that was removed in boost 1.87.
+    
+    Signed-off-by: Jason M. Bills <jason.m.bills@intel.com>
+
+commit 5856bcdb82b746a9cb5295f9f1d4d41632ccb600
+Author: MattSimmering <simmeringmatt@gmail.com>
+Date:   Mon Feb 12 14:57:57 2024 -0800
+
+    Update terminology (#6)
+    
+    Update terminology to inclusive terms
+    
+    Signed-off-by: Matt Simmering <matthew.simmering@intel.com>
+
+commit 723c121a91fd9277b03bff8c0aa6aa85e727fd40
+Author: jmbills <jasonm.bills@yahoo.com>
+Date:   Fri Jun 30 09:12:43 2023 -0600
+
+    Use variable for service install location (#4)
+    
+    After enabling 'usrmerge', the install location for systemd service
+    files changed. This uses a variable to get the installation location
+    instead of hardcoding it.
+    
+    Tested:
+    Confirmed that with 'usrmerge' enabled, the service file is correctly
+    installed.
+    
+    Signed-off-by: Jason M. Bills <jason.m.bills@intel.com>
+
+commit 7309a5838f9c5e43db2c6ba4d91f866d7fb05d1c
+Author: Jonathan Doman <jonathan.doman@intel.com>
+Date:   Thu Jan 12 17:45:03 2023 -0800
+
+    Fix ASIO callback return values (#3)
+    
+    Align return values with documented conventions introduced in sdbusplus
+    commit ae47928b21e1aece18962a5b9254837dc5d692d6. The callback should
+    return true on success, and false on failure. This code was incorrectly
+    returning 0(false) when the property value was unchanged, causing
+    callers to receive an error.
+    
+    Tested:
+    - Built against sdbusplus 5d26ec9ef5e46b93fe629fea55f1f9af8da7ded0
+    - RestrictionMode defaults to Provisioning:
+    root@bmc-mace2ce57cc3d7a:~# busctl get-property \
+        xyz.openbmc_project.RestrictionMode.Manager \
+        /xyz/openbmc_project/control/security/restriction_mode \
+        xyz.openbmc_project.Control.Security.RestrictionMode RestrictionMode
+    s "xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Provisioning"
+    
+    - Before this change, trying to set to Provisioning again fails:
+    root@bmc-mace2ce57cc3d7a:~# busctl set-property \
+        xyz.openbmc_project.RestrictionMode.Manager \
+        /xyz/openbmc_project/control/security/restriction_mode \
+        xyz.openbmc_project.Control.Security.RestrictionMode \
+        RestrictionMode s \
+        xyz.openbmc_project.Control.Security.RestrictionMode.Modes.Provisioning
+    Failed to set property RestrictionMode on interface xyz.openbmc_project.Control.Security.RestrictionMode: Invalid argument
+    
+    - After this change, the same set-property succeeds
+    
+    Signed-off-by: Jonathan Doman <jonathan.doman@intel.com>
+
+commit 81a8e7ea8e03c1ad2d8e29684e73f17a0421e610
+Author: Vernon Mauery <vernon.mauery@linux.intel.com>
+Date:   Fri Oct 14 11:21:36 2022 -0700
+
+    Change c++ std to 20 (#2)
+    
+    Building things that use sdbusplus with gcc-12 requires
+    -std=c++-20 to successfully compile.
+    
+    Signed-off-by: Vernon Mauery <vernon.mauery@intel.com>
+
+commit 0aca01b4ce9b303e12ba0f757f56390da139c8bb
+Author: Arun P. Mohanan <arun.p.m@linux.intel.com>
+Date:   Wed Sep 29 19:00:49 2021 +0530
+
+    Add README
+    
+    Add README.md file
+    
+    Change-Id: I1c881560155f77ac279b67b9ce159c3be9f3323c
+    Signed-off-by: Arun P. Mohanan <arun.p.m@linux.intel.com>
+
+commit ea03e4e87f5d5f0d873624b46ebc3deabb8d6ebe
+Author: Zhikui Ren <zhikui.ren@intel.com>
+Date:   Fri Sep 25 18:01:08 2020 -0700
+
+    Add missing includes to prepare for upstream sync
+    
+    Upstream removed broad boost include. Add missing headers to
+    fix build issues when sync with  upstream.
+    
+    Signed-off-by: Zhikui Ren <zhikui.ren@intel.com>
+    Change-Id: If048de926fe6687695d8b6bed31d2f2058f5ac7b
+
+commit 8994b09bfe2eae4e3d18f3a4633e965bd945547f
+Author: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+Date:   Mon Oct 28 13:48:29 2019 +0530
+
+    prov-mode-mgr: Log events for restriction mode
+    
+    Support added to log events for restriction mode change (system
+    interface), which can be viewed using Redfish event log entries.
+    This log will indicate the status of the system interface command
+    execution allowed state after BIOS POST.
+    
+    Tested:
+    Tested the same with up-stream message entry review
+    https://gerrit.openbmc-project.xyz/#/c/openbmc/bmcweb/+/26601/
+    1. Redfish validator - passed for this new addition
+    2. Log will be as below
+    {
+        "@data.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+        "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/184",
+        "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+        "Created": "1970-01-01T00:03:04+00:00",
+        "EntryType": "Event",
+        "Id": "184",
+        "Message": "System interface in unprovisioned state.",
+        "MessageArgs": [],
+        "MessageId": "OpenBMC.0.1.SystemInterfaceUnprovisioned",
+        "Name": "System Event Log Entry",
+        "Severity": "Critical"
+    },
+    {
+        "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+        "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/198",
+        "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+        "Created": "1970-01-01T00:03:18+00:00",
+        "EntryType": "Event",
+        "Id": "198",
+        "Message": "System interface in whitelist provisioned state.",
+        "MessageArgs": [],
+        "MessageId": "OpenBMC.0.1.SystemInterfaceWhitelistProvisioned",
+        "Name": "System Event Log Entry",
+        "Severity": "Warning"
+    },
+    {
+        "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
+        "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/204",
+        "@odata.type": "#LogEntry.v1_4_0.LogEntry",
+        "Created": "1970-01-01T00:03:24+00:00",
+        "EntryType": "Event",
+        "Id": "204",
+        "Message": "System interface in disabled provisioned state.",
+        "MessageArgs": [],
+        "MessageId": "OpenBMC.0.1.SystemInterfaceDisabledProvisioned",
+        "Name": "System Event Log Entry",
+        "Severity": "OK"
+    }
+    
+    Change-Id: Ief9547d37bff07704caebf76e87fe8dba05e2db6
+    Signed-off-by: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+
+commit c97eba39758cef421c4180c5b2554d8f16450fa6
+Author: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+Date:   Thu Oct 3 17:04:07 2019 +0530
+
+    prov-mode: Remove throwing error from prov mode.
+    
+    Provision mode manager, exposing Restriction Mode interface
+    will bail, if there is any problem in reading u-boot environment
+    variable. This was causing issues during Power on activity, as
+    it will block the whole IPMI loading itself. Hence instead of
+    bailing out, code is modified to consider the secure safest value
+    ProvisionedHostDisabled mode, if unable to get u-boot param value.
+    
+    Tested:
+    1. Verified ipmi loaded file, and whitelist filter works
+    as expected
+    2. Verified that ipmi still loads with ProvisionedHostDisbaled
+    when u-boot environment is not available
+    3. verified that it didn't disturb the old behaviour, by
+    doing read-only section update, and doing one full flash update
+    and made sure both works as expected.
+    
+    Change-Id: Ic2e896e1f2de8e876f3d82e935f1f04e7d0419dc
+    Signed-off-by: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+
+commit 298dc5c8dd24db86ea6df5c86f71a1e8da843e45
+Author: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+Date:   Mon Jun 17 19:30:34 2019 +0530
+
+    prov-mode-mgr: Daemon to manage RestrictionMode
+    
+    This daemon is used to manage the RestrictionMode property
+    under U-Boot environment variable using u-boot-env-mgr.
+    This property determines the filtering mechanism which will
+    be applied in ipmid for system interface.
+    
+    Tested:
+    1. Used busctl to verify that provision u-boot envirnoment is
+    created when started for the first time, or updated from old image
+    2. Used busctl to query RestrictionMode property and it returns
+    property as per the D-Bus interfaces.
+    3. Verified ipmid still works, and able to catch the signal
+    and work as expected (Under review, and tested updated in detail
+    in that).
+    
+    Change-Id: I16f86ebed8a65c84e12d952068404ecfff4f54ce
+    Signed-off-by: Richard Marian Thomaiyar <richard.marian.thomaiyar@linux.intel.com>
+
+commit e5c3225d7dfe1d322a4e8da71bebc2f23ade5b29
+Author: SCM Administrator <NoEmailShouldEverBeSentToSCMAdmin>
+Date:   Thu Mar 26 15:21:05 2020 -0700
+
+    Initial empty repository
